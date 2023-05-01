@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -20,10 +21,12 @@ import { MenubarModule } from 'primeng/menubar';
   ],
 })
 export class NavbarComponent {
-  items = [
+  items : MenuItem[] = [
     {
       label: 'Inicio',
       icon: 'pi pi-home',
+      routerLink: '/'
+
     },
     {
       label: 'Sobre Nosotros',
