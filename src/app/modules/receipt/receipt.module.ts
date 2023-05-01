@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ReceiptRoutingModule } from './receipt-routing.module';
 import { ReceiptComponent } from './receipt.component';
+import { UiCrudTableComponent } from 'src/app/shared/ui-crud-table/ui-crud-table.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ReceiptComponent } from './receipt.component';
   ],
   imports: [
     CommonModule,
-    ReceiptRoutingModule
+    ReceiptRoutingModule,
+    UiCrudTableComponent
   ]
 })
 export class ReceiptModule { }
