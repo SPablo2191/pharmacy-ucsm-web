@@ -1,3 +1,11 @@
 <div class="card bg-white m-4">
-  <ui-crud-table [cols]="cols"></ui-crud-table>
+  <ui-crud-table
+    [cols]="cols"
+    [items]="items"
+    searchPlaceholder="Buscar por N° Factura"
+    addTooltip="Crear Factura"
+    detailTooltip="Ver Detalle de Factura"
+    deleteTooltip="Eliminar Factura"
+    editTooltip="Editar Factura"
+  ></ui-crud-table>
 </div>
