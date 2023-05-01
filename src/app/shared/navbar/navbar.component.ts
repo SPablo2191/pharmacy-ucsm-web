@@ -8,7 +8,7 @@ import { MenubarModule } from 'primeng/menubar';
   imports: [CommonModule, MenubarModule],
   template: `
     <div>
-      <p-menubar [model]="items"></p-menubar>
+      <p-menubar [model]="items" styleClass=""></p-menubar>
     </div>
   `,
   styles: [],
