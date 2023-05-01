@@ -1,5 +1,5 @@
 <div class="m-4 text-gray-800 shadow-4 px-4 py-2 border-round">
-  <form [formGroup]="formGroup">
+  <form [formGroup]="formGroup" (ngSubmit)="submit()">
     <p class="text-4xl text-center font-bold">Agregar Nueva Factura</p>
     <ui-input-text
       [group]="formGroup"
@@ -14,9 +14,23 @@
       customClass="w-full"
     ></ui-input-text>
     <ui-input-number
-    [group]="formGroup"
-    name="phoneNumber"
-    label="Teléfono"
+      [group]="formGroup"
+      name="phoneNumber"
+      label="Teléfono"
     ></ui-input-number>
+    <ui-input-number
+      [group]="formGroup"
+      name="DNI"
+      label="DNI"
+    ></ui-input-number>
+    <ui-input-text
+      [group]="formGroup"
+      name="address"
+      label="Dirección"
+      customClass="w-full"
+    ></ui-input-text>
+    <div class="flex justify-content-center">
+      <ui-input-button label="Crear Factura"></ui-input-button>
+    </div>
   </form>
 </div>
