@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { InventoryRoutingModule } from './inventory-routing.module';
 import { InventoryComponent } from './inventory.component';
+import { UiCrudTableComponent } from 'src/app/shared/ui-crud-table/ui-crud-table.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { InventoryComponent } from './inventory.component';
   ],
   imports: [
     CommonModule,
-    InventoryRoutingModule
+    InventoryRoutingModule,
+    UiCrudTableComponent
   ]
 })
 export class InventoryModule { }
