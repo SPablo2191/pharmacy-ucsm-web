@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AddReceiptRoutingModule } from './add-receipt-routing.module';
 import { AddReceiptComponent } from './add-receipt.component';
+import { UiInputTextComponent } from 'src/app/shared/ui-input-text/ui-input-text.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AddReceiptComponent } from './add-receipt.component';
   ],
   imports: [
     CommonModule,
-    AddReceiptRoutingModule
+    AddReceiptRoutingModule,
+    UiInputTextComponent
   ]
 })
 export class AddReceiptModule { }
