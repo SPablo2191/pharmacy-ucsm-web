@@ -29,7 +29,7 @@ export class ReceiptComponent {
     {
       id: 21312,
       client: {} as Client,
-      number: '1029384728',
+      number: '4029384728',
       registerDate: new Date(),
       subTotal: 200,
       employee: {} as Employee,
@@ -37,7 +37,7 @@ export class ReceiptComponent {
     {
       id: 21312,
       client: {} as Client,
-      number: '1029384728',
+      number: '2029384728',
       registerDate: new Date(),
       subTotal: 200,
       employee: {} as Employee,

@@ -17,10 +17,12 @@ import { InputTextModule } from 'primeng/inputtext';
   ],
   template: `
     <p-table
+      #crudTable
       [columns]="cols"
       [value]="items"
       responsiveLayout="stack"
       [breakpoint]="'960px'"
+      [globalFilterFields]="globalFilterFields"
       [tableStyle]="{ 'min-width': '10rem' }"
     >
       <ng-template pTemplate="caption">
@@ -47,6 +49,9 @@ import { InputTextModule } from 'primeng/inputtext';
                 type="text"
                 class="w-full"
                 pInputText
+                (input)="
+                  crudTable.filterGlobal($any($event.target).value, 'contains')
+                "
                 [placeholder]="searchPlaceholder"
               />
             </span>
@@ -126,6 +131,7 @@ export class UiCrudTableComponent {
   @Input() detailTooltip!: string;
   @Input() addTooltip!: string;
   @Input() searchPlaceholder!: string;
+  @Input() globalFilterFields : string[] = [];
   read(_t13: any) {
     throw new Error('Method not implemented.');
   }
