@@ -89,7 +89,7 @@ import { InputTextModule } from 'primeng/inputtext';
             </div>
           </td>
           <td>
-            <div class="flex justify-content-center">
+            <div class="flex justify-content-center w-full">
             <button
               pButton
               pRipple
