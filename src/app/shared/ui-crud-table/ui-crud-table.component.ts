@@ -88,7 +88,8 @@ import { InputTextModule } from 'primeng/inputtext';
               <p *ngSwitchDefault>{{ rowData[col.field] }}</p>
             </div>
           </td>
-          <td class="flex justify-content-center">
+          <td>
+            <div class="flex justify-content-center">
             <button
               pButton
               pRipple
@@ -116,6 +117,8 @@ import { InputTextModule } from 'primeng/inputtext';
               icon="pi pi-trash"
               class="p-button-rounded p-button-warning mr-2"
             ></button>
+
+            </div>
           </td>
         </tr>
       </ng-template>
