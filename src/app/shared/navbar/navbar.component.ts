@@ -11,7 +11,13 @@ import { MenubarModule } from 'primeng/menubar';
       <p-menubar [model]="items" styleClass=""></p-menubar>
     </div>
   `,
-  styles: [],
+  styles: [
+    `
+    ng::host-deep p-menubar{
+      background: red;
+    }
+    `,
+  ],
 })
 export class NavbarComponent {
   items = [
@@ -27,6 +33,5 @@ export class NavbarComponent {
       label: 'Productos',
       icon: 'pi pi-box',
     },
-
   ];
 }
