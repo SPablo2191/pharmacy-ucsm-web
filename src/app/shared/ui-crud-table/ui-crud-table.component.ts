@@ -21,7 +21,7 @@ import { InputTextModule } from 'primeng/inputtext';
       [value]="items"
       responsiveLayout="stack"
       [breakpoint]="'960px'"
-      [tableStyle]="{ 'min-width': '50rem' }"
+      [tableStyle]="{ 'min-width': '10rem' }"
     >
       <ng-template pTemplate="caption">
         <div class="flex md:flex justify-content-center align-content-center">
@@ -66,21 +66,21 @@ import { InputTextModule } from 'primeng/inputtext';
           <td *ngFor="let col of columns" class="text-center">
             <span class="p-column-title font-bold">{{ col.header }}</span>
             <div [ngSwitch]="col.pipe">
-              <span *ngSwitchCase="'date'">
+              <p *ngSwitchCase="'date'">
                 {{
                   col.subField
                     ? rowData[col.field][col.subField]
                     : (rowData[col.field] | date : 'dd/MM/yyyy')
                 }}
-              </span>
-              <span *ngSwitchCase="'currency'">
+              </p>
+              <p *ngSwitchCase="'currency'">
                 {{
                   col.subField
                     ? rowData[col.field][col.subField]
                     : (rowData[col.field] | currency)
                 }}
-              </span>
-              <span *ngSwitchDefault>{{ rowData[col.field] }}</span>
+              </p>
+              <p *ngSwitchDefault>{{ rowData[col.field] }}</p>
             </div>
           </td>
           <td class="flex justify-content-center">
