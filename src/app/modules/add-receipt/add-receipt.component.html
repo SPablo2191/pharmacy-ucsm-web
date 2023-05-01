@@ -1,1 +1,22 @@
-<p>add-receipt works!</p>
+<div class="m-4 text-gray-800 shadow-4 px-4 py-2 border-round">
+  <form [formGroup]="formGroup">
+    <p class="text-4xl text-center font-bold">Agregar Nueva Factura</p>
+    <ui-input-text
+      [group]="formGroup"
+      name="name"
+      label="Nombre"
+      customClass="w-full"
+    ></ui-input-text>
+    <ui-input-text
+      [group]="formGroup"
+      name="lastname"
+      label="Apellido"
+      customClass="w-full"
+    ></ui-input-text>
+    <ui-input-number
+    [group]="formGroup"
+    name="phoneNumber"
+    label="Teléfono"
+    ></ui-input-number>
+  </form>
+</div>
