@@ -5,6 +5,10 @@ import { Column } from 'src/app/core/interfaces/Column.interface';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { Modal } from 'src/app/core/classes/Modal';
+import { DialogService } from 'primeng/dynamicdialog';
+import { BaseModel } from 'src/app/models/BaseModel.interface';
+
 @Component({
   selector: 'ui-crud-table',
   standalone: true,
@@ -14,7 +18,9 @@ import { InputTextModule } from 'primeng/inputtext';
     TooltipModule,
     ButtonModule,
     InputTextModule,
+
   ],
+  providers : [DialogService],
   template: `
     <p-table
       #crudTable
@@ -133,7 +139,7 @@ import { InputTextModule } from 'primeng/inputtext';
   `,
   styles: [],
 })
-export class UiCrudTableComponent {
+export class UiCrudTableComponent extends Modal {
   @Input() items!: any[];
   @Input() cols!: Column[];
   @Input() deleteTooltip!: string;
@@ -142,8 +148,15 @@ export class UiCrudTableComponent {
   @Input() addTooltip!: string;
   @Input() searchPlaceholder!: string;
   @Input() globalFilterFields : string[] = [];
-  read(_t13: any) {
-    throw new Error('Method not implemented.');
+  @Input() detailComponent! : any;
+  @Input() detailTitle! : string;
+  constructor(
+    dialogService: DialogService
+  ){
+    super(dialogService);
+  }
+  read(data : BaseModel) {
+    this.getDialog(this.detailComponent,this.detailTitle+` #${data.id}`,data);
   }
   delete(arg0: any) {
     throw new Error('Method not implemented.');

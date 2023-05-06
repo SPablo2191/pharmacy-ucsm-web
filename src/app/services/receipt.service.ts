@@ -28,7 +28,8 @@ export class ReceiptService extends BaseService {
             .getId(receipt.customer_id)
             .pipe(
               map((customer: Customer) => {
-                receipt.customer = customer.lastName+', '+customer.name;
+                receipt.customerName = customer.lastName+', '+customer.name;
+                receipt.customer = customer;
               })
             )
             .subscribe();

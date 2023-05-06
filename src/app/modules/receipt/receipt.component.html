@@ -8,6 +8,8 @@
     deleteTooltip="Eliminar Factura"
     editTooltip="Editar Factura"
     [globalFilterFields]="['number']"
+    [detailComponent]="detailComponent"
+    detailTitle="Factura"
   ></ui-crud-table>
   <!-- {{ (items$ | async)! | json }} -->
 </div>

@@ -1,4 +1,5 @@
 import { BaseModel } from './BaseModel.interface';
+import { Customer } from './Customer.interface';
 
 export interface Receipt extends BaseModel {
   number: string;
@@ -6,7 +7,8 @@ export interface Receipt extends BaseModel {
   customer_id: number;
   branch_id: number;
   details : ReceiptDetail[];
-  customer : string;
+  customerName : string;
+  customer : Customer;
 }
 export interface ReceiptDetail extends BaseModel {
   unitPrice: number;

@@ -5,6 +5,7 @@ import { Customer } from 'src/app/models/Customer.interface';
 import { Receipt } from 'src/app/models/Receipt.interface';
 import { CustomerService } from 'src/app/services/customer.service';
 import { ReceiptService } from 'src/app/services/receipt.service';
+import { DetailReceiptComponent } from '../detail-receipt/detail-receipt.component';
 
 @Component({
   selector: 'app-receipt',
@@ -13,11 +14,11 @@ import { ReceiptService } from 'src/app/services/receipt.service';
 })
 export class ReceiptComponent implements OnInit {
   items$!: Observable<Receipt[]>;
-
+  detailComponent : any = DetailReceiptComponent;
   cols: Column[] = [
     { header: 'N° de Factura', field: 'number' } as Column,
     { header: 'Fecha', field: 'registerDate', pipe: 'date' } as Column,
-    { header: 'Cliente', field: 'customer',pipe:'titlecase' } as Column,
+    { header: 'Cliente', field: 'customerName', pipe: 'titlecase' } as Column,
     { header: 'Total', field: 'total', pipe: 'currency' } as Column,
   ];
   ngOnInit(): void {
