@@ -100,7 +100,7 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
                     : (rowData[col.field] | currency)
                 }}
               </p>
-              <p *ngSwitchDefault>{{ rowData[col.field] }}</p>
+              <p *ngSwitchDefault>{{ col.subField ? rowData[col.field][col.subField] : rowData[col.field] }}</p>
             </div>
           </td>
           <td *ngIf="readOnly">

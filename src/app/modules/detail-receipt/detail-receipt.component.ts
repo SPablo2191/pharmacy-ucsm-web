@@ -20,6 +20,7 @@ export class DetailReceiptComponent implements OnInit {
   cols: Column[] = [
     { header: 'ID', field: 'index',pipe :'index' } as Column,
     { header: 'Cantidad', field: 'quantity'} as Column,
+    { header: 'Producto', field: 'product',subField:'name'} as Column,
     { header: 'Precio', field: 'unitPrice', pipe: 'currency' } as Column,
     { header: 'Sub-Total', field: 'subTotal', pipe: 'currency' } as Column,
   ];

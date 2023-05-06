@@ -1,5 +1,6 @@
 import { BaseModel } from './BaseModel.interface';
 import { Customer } from './Customer.interface';
+import { Product } from './Product.interface';
 
 export interface Receipt extends BaseModel {
   number: string;
@@ -16,4 +17,5 @@ export interface ReceiptDetail extends BaseModel {
   subTotal: number;
   receipt_id: number;
   product_id: number;
+  product : Product;
 }
