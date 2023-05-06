@@ -31,7 +31,7 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
       DNI: [],
       address: [],
       email: [],
-      branch: [this.branches],
+      branch: [],
     });
     this.getBranches();
   }
@@ -48,9 +48,13 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
     );
   }
   getDialog() {
+    if(!this.formGroup.get('branch')?.value){
+      return;
+    }
     this.ref = this.dialogService.open(ChooseProductsComponent, {
       header: `Seleccionar Producto`,
       width: '60%',
+      data: this.formGroup.get('branch')?.value,
       maximizable: true,
     });
   }

@@ -44,6 +44,7 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
                 tooltipPosition="top"
                 icon="pi pi-plus"
                 class="p-button-success"
+                *ngIf="chooseOnly"
               ></button>
             </div>
           </div>
@@ -68,7 +69,8 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
           <th *ngFor="let col of columns" class="text-center">
             {{ col.header }}
           </th>
-          <th class="text-center" *ngIf="readOnly">Acciones</th>
+          <th class="text-center" *ngIf="readOnly && chooseOnly">Acciones</th>
+          <th *ngIf="!chooseOnly">Acción</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -109,7 +111,7 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
               </p>
             </div>
           </td>
-          <td *ngIf="readOnly">
+          <td *ngIf="readOnly && chooseOnly">
             <div class="flex justify-content-center w-full">
               <button
                 pButton
@@ -140,6 +142,16 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
               ></button>
             </div>
           </td>
+          <td *ngIf="!chooseOnly">
+            <button
+              pButton
+              pRipple
+              tooltipPosition="top"
+              [pTooltip]="oneMoreTooltip"
+              icon="pi pi-plus"
+              class="p-button-rounded p-button-success mr-2"
+            ></button>
+          </td>
         </tr>
       </ng-template>
     </p-table>
@@ -158,7 +170,9 @@ export class UiCrudTableComponent extends Modal {
   @Input() detailComponent!: any;
   @Input() detailTitle!: string;
   @Input() readOnly: boolean = true;
+  @Input() chooseOnly: boolean = true;
   @Input() tableStyle: any = { 'min-width': '10rem' };
+  @Input() oneMoreTooltip! : string;
   constructor(dialogService: DialogService) {
     super(dialogService);
   }
