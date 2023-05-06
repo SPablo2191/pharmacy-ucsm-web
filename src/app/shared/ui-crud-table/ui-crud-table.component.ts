@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { Column } from 'src/app/core/interfaces/Column.interface';
@@ -147,8 +147,9 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
               pButton
               pRipple
               tooltipPosition="top"
-              [pTooltip]="oneMoreTooltip"
               icon="pi pi-plus"
+              [pTooltip]="oneMoreTooltip"
+              (click)="saveItem(rowData)"
               class="p-button-rounded p-button-success mr-2"
             ></button>
           </td>
@@ -173,6 +174,7 @@ export class UiCrudTableComponent extends Modal {
   @Input() chooseOnly: boolean = true;
   @Input() tableStyle: any = { 'min-width': '10rem' };
   @Input() oneMoreTooltip! : string;
+  @Output() returnItem = new EventEmitter<any>();
   constructor(dialogService: DialogService) {
     super(dialogService);
   }
@@ -188,5 +190,8 @@ export class UiCrudTableComponent extends Modal {
   }
   update(arg0: any) {
     throw new Error('Method not implemented.');
+  }
+  saveItem(item : any){
+    this.returnItem.emit(item);
   }
 }
