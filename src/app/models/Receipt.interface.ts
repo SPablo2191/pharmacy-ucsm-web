@@ -1,9 +1,8 @@
-export interface Receipt{
-  id : number;
-  number : string;
-  total : number;
-  customer_id : number;
-  branch_id : number;
-  status : boolean;
-  registerDate : Date;
+import { BaseModel } from './BaseModel.interface';
+
+export interface Receipt extends BaseModel {
+  number: string;
+  total: number;
+  customer_id: number;
+  branch_id: number;
 }

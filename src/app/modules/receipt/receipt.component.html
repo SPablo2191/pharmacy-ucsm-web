@@ -1,7 +1,7 @@
 <div class="card bg-white m-4">
   <ui-crud-table
     [cols]="cols"
-    [items]="items"
+    [items]="(items$ | async)!"
     searchPlaceholder="Buscar por N° Factura"
     addTooltip="Crear Factura"
     detailTooltip="Ver Detalle de Factura"
