@@ -18,6 +18,7 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
       phoneNumber: [],
       DNI: [],
       address: [],
+      email: [],
     });
   }
   override submit(): void {}
