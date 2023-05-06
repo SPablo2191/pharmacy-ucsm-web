@@ -8,7 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UiInputNumberComponent } from 'src/app/shared/ui-input-number/ui-input-number.component';
 import { UiInputButtonComponent } from 'src/app/shared/ui-input-button/ui-input-button.component';
 import { UiDropdownComponent } from 'src/app/shared/ui-dropdown/ui-dropdown.component';
-
+import { DialogService } from 'primeng/dynamicdialog';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UiDropdownComponent } from 'src/app/shared/ui-dropdown/ui-dropdown.comp
     UiInputTextComponent,
     UiInputNumberComponent,
     UiInputButtonComponent,
-    UiDropdownComponent
-  ]
+    UiDropdownComponent,
+    ButtonModule
+  ],providers: [DialogService]
 })
 export class AddReceiptModule { }

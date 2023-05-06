@@ -36,14 +36,22 @@
       customClass="w-full"
     ></ui-input-text>
     <ui-dropdown
-    [group]="formGroup"
-    name="branch"
-    [options]="branches"
-    optionLabel="fullName"
-    optionValue="id"
-    placeholder="Elegir..."
-    label="Sucursal"
+      [group]="formGroup"
+      name="branch"
+      [options]="branches"
+      optionLabel="fullName"
+      optionValue="id"
+      placeholder="Elegir..."
+      label="Sucursal"
     ></ui-dropdown>
+    <div class="flex">
+      <p-button
+        icon="pi pi-plus"
+        styleClass="p-button-rounded p-button-success mr-2"
+        label="Agregar Productos"
+        (onClick)="getDialog()"
+      ></p-button>
+    </div>
     <div class="flex justify-content-center">
       <ui-input-button label="Crear Factura"></ui-input-button>
     </div>

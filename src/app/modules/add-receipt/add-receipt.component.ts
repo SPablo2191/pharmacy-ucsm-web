@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, Subscription, map } from 'rxjs';
 import { abstractForm } from 'src/app/core/classes/abstract-form';
 import { Branch } from 'src/app/models/Branch.interface';
 import { BranchService } from 'src/app/services/branch.service';
+import { ChooseProductsComponent } from './components/choose-products/choose-products.component';
 
 @Component({
   selector: 'app-add-receipt',
@@ -11,9 +13,14 @@ import { BranchService } from 'src/app/services/branch.service';
   styleUrls: ['./add-receipt.component.scss'],
 })
 export class AddReceiptComponent extends abstractForm implements OnInit {
-  branches! : Branch[];
-  subscriptions$ : Subscription = new Subscription();
-  constructor(fb: FormBuilder, private branchService : BranchService) {
+  branches!: Branch[];
+  ref!: DynamicDialogRef;
+  subscriptions$: Subscription = new Subscription();
+  constructor(
+    fb: FormBuilder,
+    private branchService: BranchService,
+    protected dialogService: DialogService
+  ) {
     super(fb);
   }
   ngOnInit(): void {
@@ -28,12 +35,24 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
     });
     this.getBranches();
   }
-  async getBranches(){
-    this.subscriptions$.add(this.branchService.get().pipe(
-      map(response=>{
-        this.branches = response
-      })
-    ).subscribe());
+  async getBranches() {
+    this.subscriptions$.add(
+      this.branchService
+        .get()
+        .pipe(
+          map((response) => {
+            this.branches = response;
+          })
+        )
+        .subscribe()
+    );
+  }
+  getDialog() {
+    this.ref = this.dialogService.open(ChooseProductsComponent, {
+      header: `Seleccionar Producto`,
+      width: '60%',
+      maximizable: true,
+    });
   }
   override submit(): void {}
 }
