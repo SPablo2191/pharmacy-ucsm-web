@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
-  selector: 'app-ui-dropdown',
+  selector: 'ui-dropdown',
   standalone: true,
   imports: [CommonModule, DropdownModule, ReactiveFormsModule],
   template: `
@@ -15,6 +15,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
             [formControlName]="name"
             [options]="options"
             [optionLabel]="optionLabel"
+            [ngClass]="customClass"
           ></p-dropdown>
         </div>
       </form>
@@ -28,4 +29,5 @@ export class UiDropdownComponent {
   @Input() label!: string;
   @Input() options!: any[];
   @Input() optionLabel!: string;
+  @Input() customClass!: string;
 }

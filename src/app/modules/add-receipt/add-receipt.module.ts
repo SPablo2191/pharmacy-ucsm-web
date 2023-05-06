@@ -7,6 +7,7 @@ import { UiInputTextComponent } from 'src/app/shared/ui-input-text/ui-input-text
 import { ReactiveFormsModule } from '@angular/forms';
 import { UiInputNumberComponent } from 'src/app/shared/ui-input-number/ui-input-number.component';
 import { UiInputButtonComponent } from 'src/app/shared/ui-input-button/ui-input-button.component';
+import { UiDropdownComponent } from 'src/app/shared/ui-dropdown/ui-dropdown.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { UiInputButtonComponent } from 'src/app/shared/ui-input-button/ui-input-
     ReactiveFormsModule,
     UiInputTextComponent,
     UiInputNumberComponent,
-    UiInputButtonComponent
+    UiInputButtonComponent,
+    UiDropdownComponent
   ]
 })
 export class AddReceiptModule { }
