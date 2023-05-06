@@ -6,6 +6,8 @@ import { abstractForm } from 'src/app/core/classes/abstract-form';
 import { Branch } from 'src/app/models/Branch.interface';
 import { BranchService } from 'src/app/services/branch.service';
 import { ChooseProductsComponent } from './components/choose-products/choose-products.component';
+import { Product } from 'src/app/models/Product.interface';
+import { Column } from 'src/app/core/interfaces/Column.interface';
 
 @Component({
   selector: 'app-add-receipt',
@@ -14,8 +16,15 @@ import { ChooseProductsComponent } from './components/choose-products/choose-pro
 })
 export class AddReceiptComponent extends abstractForm implements OnInit {
   branches!: Branch[];
+  productsSelected : Product[] = [];
   ref!: DynamicDialogRef;
   subscriptions$: Subscription = new Subscription();
+  cols: Column[] = [
+    { header: 'ID', field: 'id', pipe: 'index' } as Column,
+    { header: 'Nombre', field: 'name' } as Column,
+    { header: 'Descripción', field: 'description' } as Column,
+    { header: 'Precio', field: 'price', pipe: 'currency' } as Column,
+  ];
   constructor(
     fb: FormBuilder,
     private branchService: BranchService,
@@ -57,6 +66,13 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
       data: this.formGroup.get('branch')?.value,
       maximizable: true,
     });
+    this.ref.onClose.pipe(
+      map((response : Product)=>{
+        if (!this.productsSelected.some(item => item.id === response.id)) {
+          this.productsSelected.push(response);
+        }
+      })
+    ).subscribe();
   }
   override submit(): void {}
 }

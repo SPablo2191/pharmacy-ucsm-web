@@ -44,7 +44,7 @@
       placeholder="Elegir..."
       label="Sucursal"
     ></ui-dropdown>
-    <div class="flex">
+    <div class="flex my-2">
       <p-button
         icon="pi pi-plus"
         styleClass="p-button-rounded p-button-success mr-2"
@@ -52,7 +52,16 @@
         (onClick)="getDialog()"
       ></p-button>
     </div>
-    <div class="flex justify-content-center">
+    <div class="w-full" *ngIf="productsSelected.length != 0">
+      <ui-crud-table
+        [readOnly]="false"
+        [items]="productsSelected"
+        [cols]="cols"
+        [writable]="true"
+        writableLabel="Cantidad"
+      ></ui-crud-table>
+    </div>
+    <div class="flex justify-content-center m-4">
       <ui-input-button label="Crear Factura"></ui-input-button>
     </div>
   </form>

@@ -70,6 +70,7 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
             {{ col.header }}
           </th>
           <th class="text-center" *ngIf="readOnly && chooseOnly">Acciones</th>
+          <th *ngIf="writable">{{writableLabel}}</th>
           <th *ngIf="!chooseOnly">Acción</th>
         </tr>
       </ng-template>
@@ -111,6 +112,20 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
               </p>
             </div>
           </td>
+          <td *ngIf="writable">
+          <input
+                type="text"
+                class="w-full"
+                pInputText
+              />
+          </td>
+          <td *ngIf="writable">
+          <input
+                type="text"
+                class="w-full"
+                pInputText
+              />
+          </td>
           <td *ngIf="readOnly && chooseOnly">
             <div class="flex justify-content-center w-full">
               <button
@@ -143,15 +158,17 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
             </div>
           </td>
           <td *ngIf="!chooseOnly">
-            <button
-              pButton
-              pRipple
-              tooltipPosition="top"
-              icon="pi pi-plus"
-              [pTooltip]="oneMoreTooltip"
-              (click)="saveItem(rowData)"
-              class="p-button-rounded p-button-success mr-2"
-            ></button>
+            <div class="flex justify-content-center w-full">
+              <button
+                pButton
+                pRipple
+                tooltipPosition="top"
+                icon="pi pi-plus"
+                [pTooltip]="oneMoreTooltip"
+                (click)="saveItem(rowData)"
+                class="p-button-rounded p-button-success mr-2"
+              ></button>
+            </div>
           </td>
         </tr>
       </ng-template>
@@ -171,9 +188,11 @@ export class UiCrudTableComponent extends Modal {
   @Input() detailComponent!: any;
   @Input() detailTitle!: string;
   @Input() readOnly: boolean = true;
+  @Input() writableLabel! : string;
+  @Input() writable : boolean = false;
   @Input() chooseOnly: boolean = true;
   @Input() tableStyle: any = { 'min-width': '10rem' };
-  @Input() oneMoreTooltip! : string;
+  @Input() oneMoreTooltip!: string;
   @Output() returnItem = new EventEmitter<any>();
   constructor(dialogService: DialogService) {
     super(dialogService);
@@ -191,7 +210,7 @@ export class UiCrudTableComponent extends Modal {
   update(arg0: any) {
     throw new Error('Method not implemented.');
   }
-  saveItem(item : any){
+  saveItem(item: any) {
     this.returnItem.emit(item);
   }
 }

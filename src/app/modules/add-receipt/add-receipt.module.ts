@@ -10,6 +10,8 @@ import { UiInputButtonComponent } from 'src/app/shared/ui-input-button/ui-input-
 import { UiDropdownComponent } from 'src/app/shared/ui-dropdown/ui-dropdown.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
+import { UiCrudTableComponent } from 'src/app/shared/ui-crud-table/ui-crud-table.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [AddReceiptComponent],
@@ -20,7 +22,9 @@ import { ButtonModule } from 'primeng/button';
     UiInputTextComponent,
     UiInputNumberComponent,
     UiInputButtonComponent,
+    UiCrudTableComponent,
     UiDropdownComponent,
+    InputTextModule,
     ButtonModule,
   ],
   providers: [DialogService, DynamicDialogRef],

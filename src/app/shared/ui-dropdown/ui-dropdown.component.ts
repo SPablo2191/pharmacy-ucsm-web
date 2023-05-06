@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   template: `
     <div class="field" [formGroup]="group">
       <label for="dropdown" class="text-gray-700">{{ label }}</label>
-      <div class="flex w-full">
+      <div class="w-full">
         <p-dropdown
           id="dropdown"
           [optionLabel]="optionLabel"
