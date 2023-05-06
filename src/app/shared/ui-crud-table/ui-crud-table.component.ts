@@ -78,6 +78,13 @@ import { InputTextModule } from 'primeng/inputtext';
                     : (rowData[col.field] | date : 'dd/MM/yyyy')
                 }}
               </p>
+              <p *ngSwitchCase="'titlecase'">
+                {{
+                  col.subField
+                    ? rowData[col.field][col.subField]
+                    : (rowData[col.field] |titlecase)
+                }}
+              </p>
               <p *ngSwitchCase="'currency'">
                 {{
                   col.subField

@@ -5,6 +5,8 @@ export interface Receipt extends BaseModel {
   total: number;
   customer_id: number;
   branch_id: number;
+  details : ReceiptDetail[];
+  customer : string;
 }
 export interface ReceiptDetail extends BaseModel {
   unitPrice: number;
