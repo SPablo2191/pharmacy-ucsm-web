@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable, Subscription, map } from 'rxjs';
 import { abstractForm } from 'src/app/core/classes/abstract-form';
+import { Branch } from 'src/app/models/Branch.interface';
+import { BranchService } from 'src/app/services/branch.service';
 
 @Component({
   selector: 'app-add-receipt',
@@ -8,7 +11,9 @@ import { abstractForm } from 'src/app/core/classes/abstract-form';
   styleUrls: ['./add-receipt.component.scss'],
 })
 export class AddReceiptComponent extends abstractForm implements OnInit {
-  constructor(fb: FormBuilder) {
+  branches! : Branch[];
+  subscriptions$ : Subscription = new Subscription();
+  constructor(fb: FormBuilder, private branchService : BranchService) {
     super(fb);
   }
   ngOnInit(): void {
@@ -19,8 +24,16 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
       DNI: [],
       address: [],
       email: [],
-      branch: [],
+      branch: [this.branches],
     });
+    this.getBranches();
+  }
+  async getBranches(){
+    this.subscriptions$.add(this.branchService.get().pipe(
+      map(response=>{
+        this.branches = response
+      })
+    ).subscribe());
   }
   override submit(): void {}
 }

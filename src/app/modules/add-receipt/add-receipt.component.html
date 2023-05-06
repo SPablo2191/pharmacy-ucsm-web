@@ -36,10 +36,13 @@
       customClass="w-full"
     ></ui-input-text>
     <ui-dropdown
-      [group]="formGroup"
-      name="branch"
-      label="Sucursal"
-      customClass="w-full"
+    [group]="formGroup"
+    name="branch"
+    [options]="branches"
+    optionLabel="fullName"
+    optionValue="id"
+    placeholder="Elegir..."
+    label="Sucursal"
     ></ui-dropdown>
     <div class="flex justify-content-center">
       <ui-input-button label="Crear Factura"></ui-input-button>

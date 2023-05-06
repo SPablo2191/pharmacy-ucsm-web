@@ -4,4 +4,5 @@ export interface Branch extends BaseModel
 {
   name : string;
   address : string;
+  fullName : string;
 }
