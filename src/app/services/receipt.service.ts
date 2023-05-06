@@ -48,7 +48,7 @@ export class ReceiptService extends BaseService {
         for(const detail of receipt.details){
           this.productService.getId(detail.product_id).pipe(
             map((product : Product) => {
-              detail.product = product
+              detail.product = product;
             })
           )
           .subscribe();

@@ -75,7 +75,7 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
         <tr>
           <td *ngFor="let col of columns; let i = index" class="text-center">
             <span class="p-column-title font-bold">{{ col.header }}</span>
-            <div [ngSwitch]="col.pipe">
+            <div [ngSwitch]="col.pipe" v *ngIf="rowData[col.field]">
               <p *ngSwitchCase="'index'">
                 {{ i + 1 }}
               </p>
@@ -100,7 +100,13 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
                     : (rowData[col.field] | currency)
                 }}
               </p>
-              <p *ngSwitchDefault>{{ col.subField ? rowData[col.field][col.subField] : rowData[col.field] }}</p>
+              <p *ngSwitchDefault>
+                {{
+                  col.subField
+                    ? rowData[col.field][col.subField]
+                    : rowData[col.field]
+                }}
+              </p>
             </div>
           </td>
           <td *ngIf="readOnly">
