@@ -18,9 +18,8 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
     TooltipModule,
     ButtonModule,
     InputTextModule,
-
   ],
-  providers : [DialogService],
+  providers: [DialogService],
   template: `
     <p-table
       #crudTable
@@ -29,9 +28,9 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
       responsiveLayout="stack"
       [breakpoint]="'960px'"
       [globalFilterFields]="globalFilterFields"
-      [tableStyle]="{ 'min-width': '10rem' }"
+      [tableStyle]="tableStyle"
     >
-      <ng-template pTemplate="caption">
+      <ng-template pTemplate="caption" *ngIf="readOnly">
         <div class="flex md:flex justify-content-center align-content-center">
           <div class="col">
             <div
@@ -69,14 +68,17 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
           <th *ngFor="let col of columns" class="text-center">
             {{ col.header }}
           </th>
-          <th class="text-center">Acciones</th>
+          <th class="text-center" *ngIf="readOnly">Acciones</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
-          <td *ngFor="let col of columns" class="text-center">
+          <td *ngFor="let col of columns; let i = index" class="text-center">
             <span class="p-column-title font-bold">{{ col.header }}</span>
             <div [ngSwitch]="col.pipe">
+              <p *ngSwitchCase="'index'">
+                {{ i + 1 }}
+              </p>
               <p *ngSwitchCase="'date'">
                 {{
                   col.subField
@@ -88,7 +90,7 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
                 {{
                   col.subField
                     ? rowData[col.field][col.subField]
-                    : (rowData[col.field] |titlecase)
+                    : (rowData[col.field] | titlecase)
                 }}
               </p>
               <p *ngSwitchCase="'currency'">
@@ -101,36 +103,35 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
               <p *ngSwitchDefault>{{ rowData[col.field] }}</p>
             </div>
           </td>
-          <td>
+          <td *ngIf="readOnly">
             <div class="flex justify-content-center w-full">
-            <button
-              pButton
-              pRipple
-              tooltipPosition="top"
-              [pTooltip]="detailTooltip"
-              (click)="read(rowData)"
-              icon="pi pi-search"
-              class="p-button-rounded p-button-info mr-2"
-            ></button>
-            <button
-              pButton
-              pRipple
-              tooltipPosition="top"
-              [pTooltip]="editTooltip"
-              (click)="update(rowData.id)"
-              icon="pi pi-pencil"
-              class="p-button-rounded p-button-success mr-2"
-            ></button>
-            <button
-              pButton
-              pRipple
-              tooltipPosition="top"
-              [pTooltip]="deleteTooltip"
-              (click)="delete(rowData.id)"
-              icon="pi pi-trash"
-              class="p-button-rounded p-button-warning mr-2"
-            ></button>
-
+              <button
+                pButton
+                pRipple
+                tooltipPosition="top"
+                [pTooltip]="detailTooltip"
+                (click)="read(rowData)"
+                icon="pi pi-search"
+                class="p-button-rounded p-button-info mr-2"
+              ></button>
+              <button
+                pButton
+                pRipple
+                tooltipPosition="top"
+                [pTooltip]="editTooltip"
+                (click)="update(rowData.id)"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-success mr-2"
+              ></button>
+              <button
+                pButton
+                pRipple
+                tooltipPosition="top"
+                [pTooltip]="deleteTooltip"
+                (click)="delete(rowData.id)"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-warning mr-2"
+              ></button>
             </div>
           </td>
         </tr>
@@ -147,16 +148,20 @@ export class UiCrudTableComponent extends Modal {
   @Input() detailTooltip!: string;
   @Input() addTooltip!: string;
   @Input() searchPlaceholder!: string;
-  @Input() globalFilterFields : string[] = [];
-  @Input() detailComponent! : any;
-  @Input() detailTitle! : string;
-  constructor(
-    dialogService: DialogService
-  ){
+  @Input() globalFilterFields: string[] = [];
+  @Input() detailComponent!: any;
+  @Input() detailTitle!: string;
+  @Input() readOnly: boolean = true;
+  @Input() tableStyle: any = { 'min-width': '10rem' };
+  constructor(dialogService: DialogService) {
     super(dialogService);
   }
-  read(data : BaseModel) {
-    this.getDialog(this.detailComponent,this.detailTitle+` #${data.id}`,data);
+  read(data: BaseModel) {
+    this.getDialog(
+      this.detailComponent,
+      this.detailTitle + ` #${data.id}`,
+      data
+    );
   }
   delete(arg0: any) {
     throw new Error('Method not implemented.');

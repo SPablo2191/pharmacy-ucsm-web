@@ -1,7 +1,30 @@
-<div class="grid">
-  <div class="col">1</div>
-  <div class="col">2</div>
-  <div class="col">3</div>
+<!-- {{this.receiptDetailed$ | async | json}} -->
+<div class="flex justify-content-center">
+  <h3>Nro de Factura: {{ this.receipt.number }}</h3>
 </div>
-<h1>Nro de Factura: {{this.receipt.number}}</h1>
-{{this.receiptDetailed$ | async | json}}
+<div class="grid">
+  <div class="col">
+    <p>
+      <b>Fecha de Registro:</b> {{ this.receipt.registerDate | date : "dd/M/yyyy" }}
+    </p>
+  </div>
+  <div class="col">
+    <p><b>Cliente:</b> {{ this.receipt.customerName | titlecase }}</p>
+  </div>
+</div>
+<div class="flex justify-content-center w-full">
+  <ui-crud-table
+    [items]="(this.receiptDetailed$ | async)!.details"
+    [cols]="cols"
+    [readOnly]="false"
+    [tableStyle]="{'width':'25rem'}"
+  >
+  </ui-crud-table>
+</div>
+<div class="flex justify-content-end">
+  <div class="grid font-bold text-2xl">
+    <div class="col">Total:</div>
+    <div class="col">{{this.receipt.total | currency}}</div>
+
+  </div>
+</div>
