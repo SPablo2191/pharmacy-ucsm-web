@@ -20,7 +20,7 @@ import { Subject } from 'rxjs';
           scrollHeight="100px"
           [placeholder]="placeholder"
           [showClear]="true"
-          styleClass="text-muted"
+          styleClass="w-full"
         ></p-dropdown>
       </div>
       <small *ngIf="valid" id="dropdown-help" class="p-error block">{{
