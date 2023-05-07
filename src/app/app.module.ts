@@ -6,9 +6,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { UiToastComponent } from './shared/ui-toast/ui-toast.component';
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +20,7 @@ import { DialogService } from 'primeng/dynamicdialog';
     HttpClientModule,
     BrowserAnimationsModule,
     ConfirmDialogModule,
-    ToastModule
+    UiToastComponent
   ],
   providers: [MessageService,ConfirmationService,DialogService],
   bootstrap: [AppComponent]

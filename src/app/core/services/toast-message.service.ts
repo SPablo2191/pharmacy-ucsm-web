@@ -8,7 +8,7 @@ export class ToastMessageService {
 	constructor(private messageService: MessageService) {}
 	showSuccess(summary: string, detail: string) {
 		this.messageService.add({
-			severity: 'woovix',
+			severity: 'success',
 			summary: summary,
 			detail: detail,
 			icon: 'pi-thumbs-up',
@@ -17,7 +17,7 @@ export class ToastMessageService {
 
 	showInfo(summary: string, detail: string) {
 		this.messageService.add({
-			severity: 'woovix',
+			severity: 'info',
 			summary: summary,
 			detail: detail,
 			icon: 'pi-info',
@@ -26,7 +26,7 @@ export class ToastMessageService {
 
 	showWarn(summary: string, detail: string) {
 		this.messageService.add({
-			severity: 'woovix',
+			severity: 'warn',
 			summary: summary,
 			detail: detail,
 			icon: 'pi-exclamation',
@@ -35,7 +35,7 @@ export class ToastMessageService {
 
 	showError(summary: string, detail: string) {
 		this.messageService.add({
-			severity: 'woovix',
+			severity: 'error',
 			summary: summary,
 			detail: detail,
 			icon: 'pi-thumbs-down',

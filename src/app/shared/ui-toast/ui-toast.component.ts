@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-ui-toast',
+  selector: 'ui-toast',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ToastModule],
   template: `
-    <p>
-      ui-toast works!
-    </p>
+    <p-toast key="success"></p-toast>
+    <p-toast key="error"></p-toast>
+    <p-toast key="warn"></p-toast>
+    <p-toast key="info"></p-toast>
   `,
-  styles: [
-  ]
+  styles: [],
 })
-export class UiToastComponent {
-
-}
+export class UiToastComponent {}
