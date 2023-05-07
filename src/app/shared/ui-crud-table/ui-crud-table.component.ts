@@ -199,8 +199,9 @@ export class UiCrudTableComponent extends Modal {
   @Input() table!: string;
   @Output() returnItem = new EventEmitter<any>();
   @Output() returnValue = new EventEmitter<number>();
+  @Output() message : EventEmitter<number> = new EventEmitter<number>();
   total: number = 0;
-  @Output() totalEmitter = new EventEmitter<number>();
+  @Output() totalEmitter = new EventEmitter<number>()
   constructor(
     dialogService: DialogService,
     confirmationService: ConfirmationService
@@ -214,7 +215,15 @@ export class UiCrudTableComponent extends Modal {
       data
     );
   }
-
+  delete(id: number,table : string) {
+    this.confirmationService.confirm({
+      header : `Eliminar ${table}`,
+      message: `¿Estás seguro que deseas eliminar este item # ${id}?`,
+      accept: () => {
+        this.message.emit(id);
+      },
+    });
+  }
   update(arg0: any) {
     throw new Error('Method not implemented.');
   }

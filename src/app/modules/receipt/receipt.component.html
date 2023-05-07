@@ -11,6 +11,7 @@
     [detailComponent]="detailComponent"
     detailTitle="Factura"
     table="Factura"
+    (message)="deleteReceipt($event)"
   ></ui-crud-table>
   <!-- {{ (items$ | async)! | json }} -->
 </div>

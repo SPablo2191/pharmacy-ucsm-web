@@ -12,23 +12,31 @@ import { DetailReceiptComponent } from '../detail-receipt/detail-receipt.compone
   templateUrl: './receipt.component.html',
   styleUrls: ['./receipt.component.scss'],
 })
-export class ReceiptComponent implements OnInit {
+export class ReceiptComponent implements OnInit, OnDestroy {
   items$!: Observable<Receipt[]>;
-  detailComponent : any = DetailReceiptComponent;
+  detailComponent: any = DetailReceiptComponent;
+  subscriptions$: Subscription = new Subscription();
   cols: Column[] = [
     { header: 'N° de Factura', field: 'number' } as Column,
     { header: 'Fecha', field: 'registerDate', pipe: 'date' } as Column,
     { header: 'Cliente', field: 'customerName', pipe: 'titlecase' } as Column,
     { header: 'Total', field: 'total', pipe: 'currency' } as Column,
   ];
-  ngOnInit(): void {
-    this.getReceipts();
-  }
   constructor(
     private receiptService: ReceiptService,
     private customerService: CustomerService
   ) {}
+  ngOnInit(): void {
+    this.getReceipts();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions$.unsubscribe();
+  }
   getReceipts() {
     this.items$ = this.receiptService.get();
+  }
+  deleteReceipt(id: number) {
+    this.subscriptions$.add(this.receiptService.delete(id).subscribe());
   }
 }

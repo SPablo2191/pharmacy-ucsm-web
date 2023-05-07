@@ -17,4 +17,8 @@ export class BaseService {
     const url = `${this.serverUrl}/${id}`;
     return this.httpClient.get<any>(url);
   }
+  delete(id: number): Observable<any> {
+    const url = `${this.serverUrl}/${id}`;
+    return this.httpClient.delete<any>(url);
+  }
 }
