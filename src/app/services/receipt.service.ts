@@ -57,4 +57,8 @@ export class ReceiptService extends BaseService {
       })
     );
   }
+  override post(data: any,params : any = {}) {
+    const url = `${environment.apiUrl}${pathnameEnum.receipts}`
+    return this.httpClient.post(url, data, { params });
+  }
 }

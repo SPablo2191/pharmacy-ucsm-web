@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { UiCrudTableComponent } from 'src/app/shared/ui-crud-table/ui-crud-table.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { AddDetailReceiptComponent } from './components/add-detail-receipt/add-detail-receipt.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AddReceiptComponent],
@@ -27,7 +28,8 @@ import { AddDetailReceiptComponent } from './components/add-detail-receipt/add-d
     UiDropdownComponent,
     InputTextModule,
     ButtonModule,
-    AddDetailReceiptComponent
+    AddDetailReceiptComponent,
+    RouterModule
   ],
   providers: [DialogService, DynamicDialogRef],
 })
