@@ -10,6 +10,16 @@
       errorMessage="Seleccionar una sucursal"
       (value)="getStock($event)"
     ></ui-dropdown>
-    <ui-crud-table *ngIf="false"></ui-crud-table>
+    <div *ngIf="stocks.length != 0">
+      <ui-crud-table
+        [cols]="cols"
+        [items]="stocks"
+        searchPlaceholder="Buscar por..."
+        [globalFilterFields]="['product.name']"
+        detailTooltip="Ver"
+        deleteTooltip="Eliminar"
+        editTooltip="Editar"
+      ></ui-crud-table>
+    </div>
   </form>
 </div>

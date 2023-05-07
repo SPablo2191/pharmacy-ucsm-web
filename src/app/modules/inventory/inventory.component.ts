@@ -5,6 +5,7 @@ import { abstractForm } from 'src/app/core/classes/abstract-form';
 import { Column } from 'src/app/core/interfaces/Column.interface';
 import { Branch } from 'src/app/models/Branch.interface';
 import { Depot } from 'src/app/models/Depot.interface';
+import { Stock } from 'src/app/models/Stock.interface';
 import { BranchService } from 'src/app/services/branch.service';
 import { DepotService } from 'src/app/services/depot.service';
 import { StockService } from 'src/app/services/stock.service';
@@ -12,19 +13,35 @@ import { StockService } from 'src/app/services/stock.service';
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss']
+  styleUrls: ['./inventory.component.scss'],
 })
-export class InventoryComponent extends abstractForm implements OnInit, OnDestroy{
-  cols : Column[] = [
-    {} as Column
+export class InventoryComponent
+  extends abstractForm
+  implements OnInit, OnDestroy
+{
+  cols: Column[] = [
+    { header: 'Producto', field: 'product', subField: 'name' } as Column,
+    {
+      header: 'Descripción',
+      field: 'product',
+      subField: 'description',
+    } as Column,
+    { header: 'Cantidad', field: 'quantity' } as Column,
+    {
+      header: 'Precio',
+      field: 'product',
+      subField: 'price',
+      pipe: 'currency',
+    } as Column,
   ];
+  stocks: Stock[] = [];
   branches!: Branch[];
   subscriptions$: Subscription = new Subscription();
   constructor(
     fb: FormBuilder,
     private branchService: BranchService,
-    private depotService : DepotService,
-    private stockService : StockService
+    private depotService: DepotService,
+    private stockService: StockService
   ) {
     super(fb);
   }
@@ -42,21 +59,35 @@ export class InventoryComponent extends abstractForm implements OnInit, OnDestro
       this.branchService
         .get()
         .pipe(
-          map((response : any) => {
+          map((response: any) => {
             this.branches = response;
           })
         )
         .subscribe()
     );
   }
-  getStock(id : number){
+  getStock(id: number) {
     console.log(id);
-    this.subscriptions$.add(this.depotService.getId(id).pipe(
-      map((depot :Depot[])=>{
-        console.log(depot);
-        let params = {depot_id : depot[0].id};
-        this.stockService.get(params).subscribe(console.log)
-      })
-    ).subscribe());
+    this.subscriptions$.add(
+      this.depotService
+        .getId(id)
+        .pipe(
+          map((depot: Depot[]) => {
+            console.log(depot);
+            let params = { depot_id: depot[0].id };
+            this.subscriptions$.add(
+              this.stockService
+                .get(params)
+                .pipe(
+                  map((stocks: Stock[]) => {
+                    this.stocks = stocks;
+                  })
+                )
+                .subscribe()
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 }

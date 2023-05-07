@@ -106,7 +106,7 @@ import { Router, RouterModule } from '@angular/router';
               <p *ngSwitchCase="'currency'">
                 {{
                   col.subField
-                    ? rowData[col.field][col.subField]
+                    ? (rowData[col.field][col.subField] | currency)
                     : (rowData[col.field] | currency)
                 }}
               </p>
