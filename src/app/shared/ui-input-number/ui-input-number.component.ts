@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'ui-input-number',
   standalone: true,
-  imports: [CommonModule, InputNumberModule,ReactiveFormsModule],
+  imports: [CommonModule, InputNumberModule, ReactiveFormsModule],
   template: `
     <div class="field" [formGroup]="group">
       <label for="input" class="text-gray-700">{{ label }}</label>
@@ -19,13 +19,24 @@ import { Subject } from 'rxjs';
           [formControlName]="name"
           [placeholder]="placeholder"
           (onInput)="onInput()"
+          [ngClass]="
+            this.group.get(this.name)?.invalid &&
+            this.group.get(this.name)?.touched
+              ? 'ng-invalid ng-dirty'
+              : ''
+          "
         >
         </p-inputNumber>
       </div>
-      <small *ngIf="valid" id="input-help" class="p-error block">{{
-        errorMessage
-      }}</small>
     </div>
+    <small
+      class="text-red-500"
+      *ngIf="
+        this.group.get(this.name)?.invalid && this.group.get(this.name)?.touched
+      "
+    >
+      campo requerido.
+    </small>
   `,
   styles: [],
 })

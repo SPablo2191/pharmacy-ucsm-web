@@ -8,10 +8,8 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   imports: [CommonModule, InputTextModule, ReactiveFormsModule],
   template: `
     <div class="field" [formGroup]="group">
-      <label [for]="name" class="text-gray-700">{{
-        label
-      }}</label>
-      <div class="p-inputgroup">
+      <label [for]="name" class="text-gray-700">{{ label }}</label>
+      <div class="p-inputgroup ">
         <input
           type="text"
           [attr.readonly]="readonly ? '' : null"
@@ -20,20 +18,22 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
           [formControlName]="name"
           autofocus
           autocomplete="off"
-          [ngClass]="{
-            'p-invalid': group.get(name)?.dirty && group.get(name)?.errors
-          }"
+          [ngClass]="
+            this.group.get(this.name)?.invalid &&
+            this.group.get(this.name)?.touched
+              ? 'ng-invalid ng-dirty'
+              : ''
+          "
           #crudInput
           [ngClass]="customClass"
         />
-        <!-- {{group.get(name)?.errors | json}} -->
-        <small
-          class="p-invalid"
-          *ngIf="group.get(name)?.dirty && group.get(name)?.errors"
-        >
-          {{ group.get(name)?.errors }}
-        </small>
       </div>
+      <small
+        class="text-red-500"
+        *ngIf="this.group.get(this.name)?.invalid && this.group.get(this.name)?.touched"
+      >
+        campo requerido.
+      </small>
     </div>
   `,
   styles: [],

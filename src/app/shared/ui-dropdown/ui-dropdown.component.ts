@@ -21,11 +21,23 @@ import { Subject } from 'rxjs';
           [placeholder]="placeholder"
           [showClear]="true"
           styleClass="w-full"
+          [ngClass]="
+            this.group.get(this.name)?.invalid &&
+            this.group.get(this.name)?.touched
+              ? 'ng-invalid ng-dirty'
+              : ''
+          "
         ></p-dropdown>
       </div>
-      <small *ngIf="valid" id="dropdown-help" class="p-error block">{{
-        errorMessage
-      }}</small>
+      <small
+        *ngIf="
+          this.group.get(this.name)?.invalid &&
+          this.group.get(this.name)?.touched
+        "
+        id="dropdown-help"
+        class="text-red-500"
+        >{{ errorMessage }}</small
+      >
     </div>
   `,
   styles: [],

@@ -10,6 +10,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { BaseModel } from 'src/app/models/BaseModel.interface';
 import { FormGroup, FormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'ui-crud-table',
@@ -21,6 +22,7 @@ import { ConfirmationService } from 'primeng/api';
     ButtonModule,
     InputTextModule,
     FormsModule,
+    RouterModule
   ],
 
   template: `
@@ -46,6 +48,7 @@ import { ConfirmationService } from 'primeng/api';
                 [pTooltip]="addTooltip"
                 tooltipPosition="top"
                 icon="pi pi-plus"
+                (click)="add()"
                 class="p-button-success"
                 *ngIf="chooseOnly"
               ></button>
@@ -197,6 +200,7 @@ export class UiCrudTableComponent extends Modal {
   @Input() tableStyle: any = { 'min-width': '10rem' };
   @Input() oneMoreTooltip!: string;
   @Input() table!: string;
+  @Input() path!: string;
   @Output() returnItem = new EventEmitter<any>();
   @Output() returnValue = new EventEmitter<number>();
   @Output() message : EventEmitter<number> = new EventEmitter<number>();
@@ -204,9 +208,15 @@ export class UiCrudTableComponent extends Modal {
   @Output() totalEmitter = new EventEmitter<number>()
   constructor(
     dialogService: DialogService,
-    confirmationService: ConfirmationService
+    confirmationService: ConfirmationService,
+    private router : Router
   ) {
     super(dialogService, confirmationService);
+  }
+  add(){
+    if(this.path){
+      this.router.navigate([this.path]);
+    }
   }
   read(data: BaseModel) {
     this.getDialog(

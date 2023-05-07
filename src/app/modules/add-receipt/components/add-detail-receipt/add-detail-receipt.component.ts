@@ -71,9 +71,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
         </tr>
       </ng-template>
       <ng-template pTemplate="summary">
-        <div class="text-right">
-          Total: {{ total | currency }}
-        </div>
+        <div class="text-right">Total: {{ total | currency }}</div>
       </ng-template>
     </p-table>
   `,
@@ -86,9 +84,9 @@ export class AddDetailReceiptComponent {
   getTotal(product: Product) {
     let index = this.products.indexOf(product);
     this.products[index].subTotal = product.quantitySelected * product.price;
-    let cont: number = 0;
-    this.products.forEach((product) => (cont += product.subTotal));
-    this.total = cont;
+    this.total = this.products.reduce((count, product) => {
+      return count + product.subTotal;
+    }, 0);
     this.group.get('total')?.setValue(this.total);
   }
 }
