@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Modal } from 'src/app/core/classes/Modal';
 import { DialogService } from 'primeng/dynamicdialog';
 import { BaseModel } from 'src/app/models/BaseModel.interface';
+import { FormGroup, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'ui-crud-table',
@@ -18,6 +19,7 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
     TooltipModule,
     ButtonModule,
     InputTextModule,
+    FormsModule,
   ],
   providers: [DialogService],
   template: `
@@ -70,7 +72,8 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
             {{ col.header }}
           </th>
           <th class="text-center" *ngIf="readOnly && chooseOnly">Acciones</th>
-          <th *ngIf="writable">{{writableLabel}}</th>
+          <th *ngIf="writable">{{ writableLabel }}</th>
+          <th *ngIf="writable">Total</th>
           <th *ngIf="!chooseOnly">Acción</th>
         </tr>
       </ng-template>
@@ -113,18 +116,17 @@ import { BaseModel } from 'src/app/models/BaseModel.interface';
             </div>
           </td>
           <td *ngIf="writable">
-          <input
-                type="text"
-                class="w-full"
-                pInputText
-              />
+            <input
+              #inputCant
+              type="text"
+              pInputText
+              min="0"
+              [(ngModel)]="rowData['quantitySelected']"
+              oninput="validity.valid||(value='');"
+            />
           </td>
           <td *ngIf="writable">
-          <input
-                type="text"
-                class="w-full"
-                pInputText
-              />
+            <p>{{ this.total }}</p>
           </td>
           <td *ngIf="readOnly && chooseOnly">
             <div class="flex justify-content-center w-full">
@@ -188,12 +190,15 @@ export class UiCrudTableComponent extends Modal {
   @Input() detailComponent!: any;
   @Input() detailTitle!: string;
   @Input() readOnly: boolean = true;
-  @Input() writableLabel! : string;
-  @Input() writable : boolean = false;
+  @Input() writableLabel!: string;
+  @Input() writable: boolean = false;
   @Input() chooseOnly: boolean = true;
   @Input() tableStyle: any = { 'min-width': '10rem' };
   @Input() oneMoreTooltip!: string;
   @Output() returnItem = new EventEmitter<any>();
+  @Output() returnValue = new EventEmitter<number>();
+  total: number = 0;
+  @Output() totalEmitter = new EventEmitter<number>();
   constructor(dialogService: DialogService) {
     super(dialogService);
   }

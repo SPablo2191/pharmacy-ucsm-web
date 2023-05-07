@@ -6,4 +6,5 @@ export interface Product extends BaseModel
   description : string;
   price : number;
   quantitySelected : string;
+  subTotal : string;
 }
