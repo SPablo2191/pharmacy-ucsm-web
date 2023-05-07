@@ -53,7 +53,7 @@
       ></p-button>
     </div>
     <div class="w-full" *ngIf="productsSelected.length != 0">
-      <add-detail-receipt [products]="productsSelected"></add-detail-receipt>
+      <add-detail-receipt [products]="productsSelected" [group]="formGroup"></add-detail-receipt>
     </div>
     <div class="flex justify-content-center m-4">
       <ui-input-button label="Crear Factura"></ui-input-button>

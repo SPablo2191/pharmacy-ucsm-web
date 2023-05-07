@@ -19,12 +19,6 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
   productsSelected : Product[] = [];
   ref!: DynamicDialogRef;
   subscriptions$: Subscription = new Subscription();
-  cols: Column[] = [
-    { header: 'ID', field: 'id', pipe: 'index' } as Column,
-    { header: 'Nombre', field: 'name' } as Column,
-    { header: 'Descripción', field: 'description' } as Column,
-    { header: 'Precio', field: 'price', pipe: 'currency' } as Column,
-  ];
   constructor(
     fb: FormBuilder,
     private branchService: BranchService,
@@ -41,6 +35,8 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
       address: [],
       email: [],
       branch: [],
+      details : [this.productsSelected],
+      total : []
     });
     this.getBranches();
   }
@@ -74,5 +70,8 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
       })
     ).subscribe();
   }
-  override submit(): void {}
+  override submit(): void {
+    console.log(this.formGroup.get('total')?.value);
+
+  }
 }

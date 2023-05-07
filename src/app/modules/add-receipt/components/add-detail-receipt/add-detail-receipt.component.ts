@@ -3,12 +3,18 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { Product } from 'src/app/models/Product.interface';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'add-detail-receipt',
   standalone: true,
-  imports: [CommonModule, TableModule, InputTextModule, FormsModule],
+  imports: [
+    CommonModule,
+    TableModule,
+    InputTextModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   template: `
     <!-- Contenido de la pagina -->
 
@@ -47,16 +53,27 @@ import { FormsModule } from '@angular/forms';
             >{{ product.price | currency }}
           </td>
           <td>
+            <span class="p-column-title font-bold">Cantidad</span>
             <input
               #inputCant
-              type="text"
+              type="number"
               pInputText
               min="0"
               [(ngModel)]="product.quantitySelected"
               oninput="validity.valid||(value='');"
+              (change)="getTotal(product)"
             />
           </td>
+          <td>
+            <span class="p-column-title font-bold">Sub-Total</span>
+            {{ product.subTotal | currency }}
+          </td>
         </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="text-right">
+          Total: {{ total | currency }}
+        </div>
       </ng-template>
     </p-table>
   `,
@@ -64,4 +81,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddDetailReceiptComponent {
   @Input() products!: Product[];
+  @Input() group!: FormGroup;
+  total: number = 0;
+  getTotal(product: Product) {
+    let index = this.products.indexOf(product);
+    this.products[index].subTotal = product.quantitySelected * product.price;
+    let cont: number = 0;
+    this.products.forEach((product) => (cont += product.subTotal));
+    this.total = cont;
+    this.group.get('total')?.setValue(this.total);
+  }
 }
