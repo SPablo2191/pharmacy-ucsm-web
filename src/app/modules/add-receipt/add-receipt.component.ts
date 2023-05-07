@@ -57,9 +57,9 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
     );
   }
   getDialog() {
-    if(!this.formGroup.get('branch')?.value){
-      return;
-    }
+    // if(!this.formGroup.get('branch')?.value){
+    //   return;
+    // }
     this.ref = this.dialogService.open(ChooseProductsComponent, {
       header: `Seleccionar Producto`,
       width: '60%',

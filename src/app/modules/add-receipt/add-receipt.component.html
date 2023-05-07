@@ -53,13 +53,7 @@
       ></p-button>
     </div>
     <div class="w-full" *ngIf="productsSelected.length != 0">
-      <ui-crud-table
-        [readOnly]="false"
-        [items]="productsSelected"
-        [cols]="cols"
-        [writable]="true"
-        writableLabel="Cantidad"
-      ></ui-crud-table>
+      <add-detail-receipt [products]="productsSelected"></add-detail-receipt>
     </div>
     <div class="flex justify-content-center m-4">
       <ui-input-button label="Crear Factura"></ui-input-button>
