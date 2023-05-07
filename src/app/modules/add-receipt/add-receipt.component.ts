@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, Subscription, map } from 'rxjs';
@@ -20,7 +20,7 @@ import { ToastMessageService } from 'src/app/core/services/toast-message.service
   templateUrl: './add-receipt.component.html',
   styleUrls: ['./add-receipt.component.scss'],
 })
-export class AddReceiptComponent extends abstractForm implements OnInit {
+export class AddReceiptComponent extends abstractForm implements OnInit,OnDestroy {
   branches!: Branch[];
   productsSelected: Product[] = [];
   ref!: DynamicDialogRef;
@@ -35,6 +35,9 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
     private router: Router
   ) {
     super(fb);
+  }
+  ngOnDestroy(): void {
+    this.subscriptions$.unsubscribe();
   }
   ngOnInit(): void {
     this.createForm({

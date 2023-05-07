@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { Column } from 'src/app/core/interfaces/Column.interface';
@@ -182,7 +182,7 @@ import { Router, RouterModule } from '@angular/router';
   `,
   styles: [],
 })
-export class UiCrudTableComponent extends Modal {
+export class UiCrudTableComponent extends Modal implements OnDestroy {
   @Input() items!: any[];
   @Input() cols!: Column[];
   @Input() deleteTooltip!: string;
@@ -213,6 +213,9 @@ export class UiCrudTableComponent extends Modal {
   ) {
     super(dialogService, confirmationService);
   }
+  ngOnDestroy(): void {
+    this.subscriptions$.unsubscribe();
+  }
   add(){
     if(this.path){
       this.router.navigate([this.path]);
@@ -240,4 +243,5 @@ export class UiCrudTableComponent extends Modal {
   saveItem(item: any) {
     this.returnItem.emit(item);
   }
+
 }

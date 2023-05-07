@@ -1,1 +1,15 @@
-
+<div class="card bg-white m-4">
+  <form [formGroup]="formGroup">
+    <ui-dropdown
+      [group]="formGroup"
+      name="branch"
+      [options]="branches"
+      optionLabel="fullName"
+      optionValue="id"
+      placeholder="Elegir una sucursal..."
+      errorMessage="Seleccionar una sucursal"
+      (value)="getStock($event)"
+    ></ui-dropdown>
+    <ui-crud-table *ngIf="false"></ui-crud-table>
+  </form>
+</div>

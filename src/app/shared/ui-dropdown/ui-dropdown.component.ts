@@ -19,6 +19,7 @@ import { Subject } from 'rxjs';
           [formControlName]="name"
           scrollHeight="100px"
           [placeholder]="placeholder"
+          (onChange)="onInput()"
           [showClear]="true"
           styleClass="w-full"
           [ngClass]="
@@ -54,7 +55,7 @@ export class UiDropdownComponent {
   @Input() name!: string;
   @Input() type!: string;
   valid: boolean = false;
-  @Output() value = new EventEmitter<string>();
+  @Output() value = new EventEmitter<any>();
   change: Subject<string> = new Subject<string>();
 
   onInput() {
