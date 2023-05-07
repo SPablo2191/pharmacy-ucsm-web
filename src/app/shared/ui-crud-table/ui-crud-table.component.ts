@@ -9,6 +9,7 @@ import { Modal } from 'src/app/core/classes/Modal';
 import { DialogService } from 'primeng/dynamicdialog';
 import { BaseModel } from 'src/app/models/BaseModel.interface';
 import { FormGroup, FormsModule } from '@angular/forms';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'ui-crud-table',
@@ -21,7 +22,7 @@ import { FormGroup, FormsModule } from '@angular/forms';
     InputTextModule,
     FormsModule,
   ],
-  providers: [DialogService],
+
   template: `
     <p-table
       #crudTable
@@ -153,7 +154,7 @@ import { FormGroup, FormsModule } from '@angular/forms';
                 pRipple
                 tooltipPosition="top"
                 [pTooltip]="deleteTooltip"
-                (click)="delete(rowData.id)"
+                (click)="delete(rowData.id,table)"
                 icon="pi pi-trash"
                 class="p-button-rounded p-button-warning mr-2"
               ></button>
@@ -195,12 +196,16 @@ export class UiCrudTableComponent extends Modal {
   @Input() chooseOnly: boolean = true;
   @Input() tableStyle: any = { 'min-width': '10rem' };
   @Input() oneMoreTooltip!: string;
+  @Input() table!: string;
   @Output() returnItem = new EventEmitter<any>();
   @Output() returnValue = new EventEmitter<number>();
   total: number = 0;
   @Output() totalEmitter = new EventEmitter<number>();
-  constructor(dialogService: DialogService) {
-    super(dialogService);
+  constructor(
+    dialogService: DialogService,
+    confirmationService: ConfirmationService
+  ) {
+    super(dialogService, confirmationService);
   }
   read(data: BaseModel) {
     this.getDialog(
@@ -209,9 +214,7 @@ export class UiCrudTableComponent extends Modal {
       data
     );
   }
-  delete(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
+
   update(arg0: any) {
     throw new Error('Method not implemented.');
   }

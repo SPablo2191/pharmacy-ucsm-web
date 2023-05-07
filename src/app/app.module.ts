@@ -5,7 +5,10 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 @NgModule({
   declarations: [
     AppComponent
@@ -15,9 +18,11 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations'
     AppRoutingModule,
     NavbarComponent,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ConfirmDialogModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService,ConfirmationService,DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
