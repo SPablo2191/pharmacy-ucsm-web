@@ -41,7 +41,7 @@ import { Router, RouterModule } from '@angular/router';
             <div
               class="flex align-content-center justify-content-center lg:justify-content-start"
             >
-              <button
+              <!-- <button
                 pButton
                 pRipple
                 label="Nuevo"
@@ -51,7 +51,7 @@ import { Router, RouterModule } from '@angular/router';
                 (click)="add()"
                 class="p-button-success"
                 *ngIf="chooseOnly"
-              ></button>
+              ></button> -->
             </div>
           </div>
           <div class="col">

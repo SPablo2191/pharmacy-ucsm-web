@@ -1,7 +1,7 @@
 import { BaseModel } from "./BaseModel.interface";
 
 export interface Customer extends BaseModel{
-  name : string;
+  name : string ;
   lastName : string;
   phoneNumber : string;
   email: string;

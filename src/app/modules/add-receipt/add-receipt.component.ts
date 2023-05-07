@@ -8,6 +8,10 @@ import { BranchService } from 'src/app/services/branch.service';
 import { ChooseProductsComponent } from './components/choose-products/choose-products.component';
 import { Product } from 'src/app/models/Product.interface';
 import { Column } from 'src/app/core/interfaces/Column.interface';
+import { CustomerService } from 'src/app/services/customer.service';
+import { Customer } from 'src/app/models/Customer.interface';
+import { ReceiptService } from 'src/app/services/receipt.service';
+import { Receipt } from 'src/app/models/Receipt.interface';
 
 @Component({
   selector: 'app-add-receipt',
@@ -22,14 +26,16 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
   constructor(
     fb: FormBuilder,
     private branchService: BranchService,
-    protected dialogService: DialogService
+    protected dialogService: DialogService,
+    private customerService: CustomerService,
+    private receiptService : ReceiptService
   ) {
     super(fb);
   }
   ngOnInit(): void {
     this.createForm({
       name: [null,Validators.required],
-      lastname: [null,Validators.required],
+      lastName: [null,Validators.required],
       phoneNumber: [null,Validators.required],
       DNI: [null,Validators.required],
       address: [null,Validators.required],
@@ -74,9 +80,32 @@ export class AddReceiptComponent extends abstractForm implements OnInit {
     this.formGroup.markAsDirty();
     this.formGroup.markAllAsTouched();
     if (!this.formGroup.valid) {
+      console.log(this.formGroup.controls['branch'].value);
 			return
 		}
-    console.log("lo logro :D");
-
+    // create the new customer
+    let customer : Customer = {
+      name : this.formGroup.controls['name'].value,
+      lastName : this.formGroup.controls['lastName'].value,
+      address : this.formGroup.controls['address'].value,
+      DNI : this.formGroup.controls['DNI'].value,
+      email: this.formGroup.controls['email'].value,
+      phoneNumber : this.formGroup.controls['phoneNumber'].value
+    } as Customer;
+    this.subscriptions$.add(
+      this.customerService.post(customer).pipe(
+        map((response : any)=>{
+          console.log(response);
+          // create a new receipt
+          let receipt : Receipt = {
+            branch_id : this.formGroup.controls['branch'].value,
+            customer_id : response.id,
+            details : this.formGroup.controls['details'].value,
+            total : this.formGroup.controls['total'].value,
+          } as Receipt;
+          this.subscriptions$.add(this.receiptService.post(receipt).subscribe());
+        })
+      ).subscribe()
+    );
   }
 }
