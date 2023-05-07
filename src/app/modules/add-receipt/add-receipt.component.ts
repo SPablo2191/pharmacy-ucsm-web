@@ -12,8 +12,8 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/models/Customer.interface';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Receipt, ReceiptDetail } from 'src/app/models/Receipt.interface';
-import { ToastMessageService } from 'src/app/core/services/toast-message.service';
 import { Router } from '@angular/router';
+import { ToastMessageService } from 'src/app/core/services/toast-message.service';
 
 @Component({
   selector: 'app-add-receipt',

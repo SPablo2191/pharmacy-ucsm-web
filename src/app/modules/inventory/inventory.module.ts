@@ -5,6 +5,7 @@ import { InventoryRoutingModule } from './inventory-routing.module';
 import { InventoryComponent } from './inventory.component';
 import { UiCrudTableComponent } from 'src/app/shared/ui-crud-table/ui-crud-table.component';
 import { UiDropdownComponent } from 'src/app/shared/ui-dropdown/ui-dropdown.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UiDropdownComponent } from 'src/app/shared/ui-dropdown/ui-dropdown.comp
     CommonModule,
     InventoryRoutingModule,
     UiCrudTableComponent,
-    UiDropdownComponent
+    UiDropdownComponent,
+    ReactiveFormsModule
   ]
 })
 export class InventoryModule { }
