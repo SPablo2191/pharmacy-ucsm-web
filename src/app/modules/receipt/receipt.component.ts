@@ -6,6 +6,7 @@ import { Receipt } from 'src/app/models/Receipt.interface';
 import { CustomerService } from 'src/app/services/customer.service';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { DetailReceiptComponent } from '../detail-receipt/detail-receipt.component';
+import { ToastMessageService } from 'src/app/core/services/toast-message.service';
 
 @Component({
   selector: 'app-receipt',
@@ -24,7 +25,8 @@ export class ReceiptComponent implements OnInit, OnDestroy {
   ];
   constructor(
     private receiptService: ReceiptService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private toastService : ToastMessageService
   ) {}
   ngOnInit(): void {
     this.getReceipts();
@@ -37,6 +39,10 @@ export class ReceiptComponent implements OnInit, OnDestroy {
     this.items$ = this.receiptService.get();
   }
   deleteReceipt(id: number) {
-    this.subscriptions$.add(this.receiptService.delete(id).subscribe());
+    this.subscriptions$.add(this.receiptService.delete(id).pipe(
+      map((response)=>{
+        this.toastService.showSuccess('¡Se elimino la factura con exito!')
+      })
+    ).subscribe());
   }
 }

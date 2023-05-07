@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { InventoryRoutingModule } from './inventory-routing.module';
 import { InventoryComponent } from './inventory.component';
 import { UiCrudTableComponent } from 'src/app/shared/ui-crud-table/ui-crud-table.component';
+import { UiDropdownComponent } from 'src/app/shared/ui-dropdown/ui-dropdown.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { UiCrudTableComponent } from 'src/app/shared/ui-crud-table/ui-crud-table
   imports: [
     CommonModule,
     InventoryRoutingModule,
-    UiCrudTableComponent
+    UiCrudTableComponent,
+    UiDropdownComponent
   ]
 })
 export class InventoryModule { }

@@ -6,7 +6,7 @@ import { MessageService } from 'primeng/api'
 })
 export class ToastMessageService {
 	constructor(private messageService: MessageService) {}
-	showSuccess(summary: string, detail: string) {
+	showSuccess(summary: string, detail: string = '') {
 		this.messageService.add({
       key : 'success',
 			severity: 'success',
@@ -16,7 +16,7 @@ export class ToastMessageService {
 		})
 	}
 
-	showInfo(summary: string, detail: string) {
+	showInfo(summary: string, detail: string = '') {
 		this.messageService.add({
       key : 'info',
 			severity: 'info',
@@ -26,7 +26,7 @@ export class ToastMessageService {
 		})
 	}
 
-	showWarn(summary: string, detail: string) {
+	showWarn(summary: string, detail: string = '') {
 		this.messageService.add({
       key : 'warn',
 			severity: 'warn',
@@ -36,7 +36,7 @@ export class ToastMessageService {
 		})
 	}
 
-	showError(summary: string, detail: string) {
+	showError(summary: string, detail: string = '') {
 		this.messageService.add({
       key : 'error',
 			severity: 'error',
