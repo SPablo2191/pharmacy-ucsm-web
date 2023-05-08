@@ -23,8 +23,8 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
       [value]="products"
       [rows]="5"
       [paginator]="true"
-      responsiveLayout="stack"
       [rowHover]="true"
+      responsiveLayout="stack"
       dataKey="idProveedor"
       [showCurrentPageReport]="false"
     >

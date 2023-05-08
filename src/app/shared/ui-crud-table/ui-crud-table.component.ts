@@ -30,6 +30,9 @@ import { Router, RouterModule } from '@angular/router';
       #crudTable
       [columns]="cols"
       [value]="items"
+      [rows]="5"
+      [paginator]="true"
+      [rowHover]="true"
       responsiveLayout="stack"
       [breakpoint]="'960px'"
       [globalFilterFields]="globalFilterFields"
@@ -41,7 +44,7 @@ import { Router, RouterModule } from '@angular/router';
             <div
               class="flex align-content-center justify-content-center lg:justify-content-start"
             >
-              <!-- <button
+              <button
                 pButton
                 pRipple
                 label="Nuevo"
@@ -51,7 +54,7 @@ import { Router, RouterModule } from '@angular/router';
                 (click)="add()"
                 class="p-button-success"
                 *ngIf="chooseOnly"
-              ></button> -->
+              ></button>
             </div>
           </div>
           <div class="col">
@@ -143,7 +146,7 @@ import { Router, RouterModule } from '@angular/router';
                 icon="pi pi-search"
                 class="p-button-rounded p-button-info mr-2"
               ></button>
-              <button
+              <!-- <button
                 pButton
                 pRipple
                 tooltipPosition="top"
@@ -151,7 +154,7 @@ import { Router, RouterModule } from '@angular/router';
                 (click)="update(rowData.id)"
                 icon="pi pi-pencil"
                 class="p-button-rounded p-button-success mr-2"
-              ></button>
+              ></button> -->
               <button
                 pButton
                 pRipple
