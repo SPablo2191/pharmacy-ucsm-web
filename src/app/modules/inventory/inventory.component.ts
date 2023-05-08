@@ -10,6 +10,7 @@ import { BranchService } from 'src/app/services/branch.service';
 import { DepotService } from 'src/app/services/depot.service';
 import { StockService } from 'src/app/services/stock.service';
 import { AddStockComponent } from './components/add-stock/add-stock.component';
+import { ToastMessageService } from 'src/app/core/services/toast-message.service';
 
 @Component({
   selector: 'app-inventory',
@@ -20,7 +21,7 @@ export class InventoryComponent
   extends abstractForm
   implements OnInit, OnDestroy
 {
-  addComponent : any = AddStockComponent;
+  addComponent: any = AddStockComponent;
   cols: Column[] = [
     { header: 'Producto', field: 'product', subField: 'name' } as Column,
     {
@@ -43,7 +44,8 @@ export class InventoryComponent
     fb: FormBuilder,
     private branchService: BranchService,
     private depotService: DepotService,
-    private stockService: StockService
+    private stockService: StockService,
+    private toastService: ToastMessageService
   ) {
     super(fb);
   }
@@ -87,6 +89,18 @@ export class InventoryComponent
                 )
                 .subscribe()
             );
+          })
+        )
+        .subscribe()
+    );
+  }
+  deleteStock(id: number) {
+    this.subscriptions$.add(
+      this.stockService
+        .delete(id)
+        .pipe(
+          map((response) => {
+            this.toastService.showSuccess('¡Se elimino el stock con exito!');
           })
         )
         .subscribe()

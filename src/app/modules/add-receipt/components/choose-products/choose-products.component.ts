@@ -29,7 +29,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 export class ChooseProductsComponent implements OnInit {
   products$!: Observable<Product[]>;
   cols: Column[] = [
-    { header: 'ID', field: 'id', pipe: 'index' } as Column,
+    { header: 'ID', field: 'id'} as Column,
     { header: 'Nombre', field: 'name' } as Column,
     { header: 'Descripción', field: 'description' } as Column,
     { header: 'Precio', field: 'price', pipe: 'currency' } as Column,

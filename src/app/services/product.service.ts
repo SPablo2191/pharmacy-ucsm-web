@@ -17,4 +17,8 @@ export class ProductService extends BaseService {
     const url = `${environment.apiUrl}${pathnameEnum.products}`
     return this.httpClient.get<any []>(url,{params});
   }
+  override post(data: any) {
+    const url = `${environment.apiUrl}${pathnameEnum.products}`
+    return this.httpClient.post(url, data);
+  }
 }
