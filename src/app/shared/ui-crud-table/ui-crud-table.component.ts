@@ -194,6 +194,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class UiCrudTableComponent extends Modal implements OnDestroy {
   @Input() items!: any[];
+  @Input() addData!: any;
   @Input() cols!: Column[];
   @Input() deleteTooltip!: string;
   @Input() editTooltip!: string;
@@ -233,11 +234,8 @@ export class UiCrudTableComponent extends Modal implements OnDestroy {
     if (this.path) {
       this.router.navigate([this.path]);
     }
-    if(this.addComponent){
-      this.getDialog(
-        this.addComponent,
-        this.addTitle
-      );
+    if (this.addComponent) {
+      this.getDialog(this.addComponent, this.addTitle, this.addData);
     }
   }
   read(data: BaseModel) {

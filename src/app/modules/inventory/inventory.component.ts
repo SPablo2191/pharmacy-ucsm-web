@@ -22,6 +22,7 @@ export class InventoryComponent
   implements OnInit, OnDestroy
 {
   addComponent: any = AddStockComponent;
+  depot! : Depot;
   cols: Column[] = [
     { header: 'Producto', field: 'product', subField: 'name' } as Column,
     {
@@ -78,6 +79,7 @@ export class InventoryComponent
         .pipe(
           map((depot: Depot[]) => {
             console.log(depot);
+            this.depot = depot[0];
             let params = { depot_id: depot[0].id };
             this.subscriptions$.add(
               this.stockService

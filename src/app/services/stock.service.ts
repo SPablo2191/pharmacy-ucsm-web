@@ -31,4 +31,7 @@ export class StockService extends BaseService {
       })
     );
   }
+  override post(data: any,params : any = {}) {
+    return this.httpClient.post(this.serverUrl, data, { params });
+  }
 }
