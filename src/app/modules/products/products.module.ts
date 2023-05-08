@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
+import { UiCrudTableComponent } from 'src/app/shared/ui-crud-table/ui-crud-table.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ProductsComponent } from './products.component';
   ],
   imports: [
     CommonModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    UiCrudTableComponent,
   ]
 })
 export class ProductsModule { }

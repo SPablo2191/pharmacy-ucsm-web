@@ -235,7 +235,7 @@ export class UiCrudTableComponent extends Modal implements OnDestroy {
     }
     if(this.addComponent){
       this.getDialog(
-        this.detailComponent,
+        this.addComponent,
         this.addTitle
       );
     }

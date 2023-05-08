@@ -9,6 +9,7 @@ import { Stock } from 'src/app/models/Stock.interface';
 import { BranchService } from 'src/app/services/branch.service';
 import { DepotService } from 'src/app/services/depot.service';
 import { StockService } from 'src/app/services/stock.service';
+import { AddStockComponent } from './components/add-stock/add-stock.component';
 
 @Component({
   selector: 'app-inventory',
@@ -19,6 +20,7 @@ export class InventoryComponent
   extends abstractForm
   implements OnInit, OnDestroy
 {
+  addComponent : any = AddStockComponent;
   cols: Column[] = [
     { header: 'Producto', field: 'product', subField: 'name' } as Column,
     {
