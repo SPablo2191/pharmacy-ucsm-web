@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { Column } from 'src/app/core/interfaces/Column.interface';
@@ -22,7 +28,7 @@ import { Router, RouterModule } from '@angular/router';
     ButtonModule,
     InputTextModule,
     FormsModule,
-    RouterModule
+    RouterModule,
   ],
 
   template: `
@@ -144,6 +150,7 @@ import { Router, RouterModule } from '@angular/router';
                 [pTooltip]="detailTooltip"
                 (click)="read(rowData)"
                 icon="pi pi-search"
+                *ngIf="viewDetail"
                 class="p-button-rounded p-button-info mr-2"
               ></button>
               <!-- <button
@@ -160,7 +167,7 @@ import { Router, RouterModule } from '@angular/router';
                 pRipple
                 tooltipPosition="top"
                 [pTooltip]="deleteTooltip"
-                (click)="delete(rowData.id,table)"
+                (click)="delete(rowData.id, table)"
                 icon="pi pi-trash"
                 class="p-button-rounded p-button-warning mr-2"
               ></button>
@@ -196,7 +203,10 @@ export class UiCrudTableComponent extends Modal implements OnDestroy {
   @Input() globalFilterFields: string[] = [];
   @Input() detailComponent!: any;
   @Input() detailTitle!: string;
+  @Input() addComponent!: any;
+  @Input() addTitle!: string;
   @Input() readOnly: boolean = true;
+  @Input() viewDetail: boolean = true;
   @Input() writableLabel!: string;
   @Input() writable: boolean = false;
   @Input() chooseOnly: boolean = true;
@@ -206,22 +216,28 @@ export class UiCrudTableComponent extends Modal implements OnDestroy {
   @Input() path!: string;
   @Output() returnItem = new EventEmitter<any>();
   @Output() returnValue = new EventEmitter<number>();
-  @Output() message : EventEmitter<number> = new EventEmitter<number>();
+  @Output() message: EventEmitter<number> = new EventEmitter<number>();
   total: number = 0;
-  @Output() totalEmitter = new EventEmitter<number>()
+  @Output() totalEmitter = new EventEmitter<number>();
   constructor(
     dialogService: DialogService,
     confirmationService: ConfirmationService,
-    private router : Router
+    private router: Router
   ) {
     super(dialogService, confirmationService);
   }
   ngOnDestroy(): void {
     this.subscriptions$.unsubscribe();
   }
-  add(){
-    if(this.path){
+  add() {
+    if (this.path) {
       this.router.navigate([this.path]);
+    }
+    if(this.addComponent){
+      this.getDialog(
+        this.detailComponent,
+        this.addTitle
+      );
     }
   }
   read(data: BaseModel) {
@@ -231,9 +247,9 @@ export class UiCrudTableComponent extends Modal implements OnDestroy {
       data
     );
   }
-  delete(id: number,table : string) {
+  delete(id: number, table: string) {
     this.confirmationService.confirm({
-      header : `Eliminar ${table}`,
+      header: `Eliminar ${table}`,
       message: `¿Estás seguro que deseas eliminar este item # ${id}?`,
       accept: () => {
         this.message.emit(id);
@@ -246,5 +262,4 @@ export class UiCrudTableComponent extends Modal implements OnDestroy {
   saveItem(item: any) {
     this.returnItem.emit(item);
   }
-
 }
