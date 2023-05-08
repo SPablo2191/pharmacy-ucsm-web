@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Column } from 'src/app/core/interfaces/Column.interface';
 import { Product } from 'src/app/models/Product.interface';
 import { ProductService } from 'src/app/services/product.service';
+import { AddProductComponent } from './components/add-product/add-product.component';
 
 @Component({
   selector: 'app-products',
@@ -10,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit{
-  addComponent! : any;
+  addComponent : any = AddProductComponent;
 
   cols: Column[] = [
     { header: 'ID', field: 'id', pipe: 'index' } as Column,

@@ -1,16 +1,15 @@
 <div class="card bg-white m-4">
-    <div *ngIf="(products$ | async)!.length != 0">
-      <ui-crud-table
-        [cols]="cols"
-        [items]="(products$ | async)!"
-        searchPlaceholder="Buscar por..."
-        [globalFilterFields]="['name']"
-        [viewDetail]="false"
-        deleteTooltip="Eliminar"
-        [addComponent]="addComponent"
-        addTitle="Añadir Stock"
-        table="Stock"
-      ></ui-crud-table>
-    </div>
+  <div>
+    <ui-crud-table
+      [cols]="cols"
+      [items]="(products$ | async)!"
+      searchPlaceholder="Buscar por..."
+      [globalFilterFields]="['name']"
+      [viewDetail]="false"
+      deleteTooltip="Eliminar"
+      [addComponent]="addComponent"
+      addTitle="Añadir Producto"
+      table="Stock"
+    ></ui-crud-table>
+  </div>
 </div>
-

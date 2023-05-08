@@ -29,12 +29,14 @@ export class NavbarComponent {
 
     },
     {
-      label: 'Sobre Nosotros',
-      icon: 'pi pi-users',
-    },
-    {
       label: 'Productos',
       icon: 'pi pi-box',
+      routerLink: '/products'
+    },
+    {
+      label: 'Facturas',
+      icon: 'bi bi-receipt',
+      routerLink: '/receipt'
     },
   ];
 }
