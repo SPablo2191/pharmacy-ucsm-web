@@ -58,7 +58,7 @@ import { StockService } from 'src/app/services/stock.service';
         label="Cantidad"
       ></ui-input-number>
       <div class="flex justify-content-center m-4">
-        <ui-input-button label="Crear Factura"></ui-input-button>
+        <ui-input-button label="Añadir Stock"></ui-input-button>
       </div>
     </form>
   `,

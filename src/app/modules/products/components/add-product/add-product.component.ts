@@ -41,7 +41,7 @@ import { Subscription, map } from 'rxjs';
         label="Precio"
       ></ui-input-number>
       <div class="flex justify-content-center m-4">
-        <ui-input-button label="Crear Factura"></ui-input-button>
+        <ui-input-button label="Añadir Producto"></ui-input-button>
       </div>
     </form>
   `,
