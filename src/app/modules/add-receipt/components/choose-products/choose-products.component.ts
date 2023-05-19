@@ -42,8 +42,6 @@ export class ChooseProductsComponent implements OnInit {
     this.products$ = this.productService.get();
   }
   closeDialog(item : Product){
-    console.log(item);
-
     this.ref.close(item);
   }
 }

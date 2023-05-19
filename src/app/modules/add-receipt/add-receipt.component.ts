@@ -126,7 +126,6 @@ export class AddReceiptComponent extends abstractForm implements OnInit,OnDestro
               details: details,
               total: this.formGroup.controls['total'].value,
             } as Receipt;
-            console.log(receipt.details);
             this.subscriptions$.add(
               this.receiptService
                 .post(receipt, {
@@ -135,7 +134,6 @@ export class AddReceiptComponent extends abstractForm implements OnInit,OnDestro
                 })
                 .pipe(
                   map((response) => {
-                    console.log(response);
                     this.toastService.showSuccess(
                       'Registro Exitoso!!!',
                       'La factura fue registrada con exito.'

@@ -91,7 +91,6 @@ export class AddStockComponent
       quantity: [null, Validators.required],
     });
     this.depotSelected = this.config.data;
-    console.log(this.depotSelected);
   }
   getDialog() {
     this.ref = this.dialogService.open(ChooseProductsComponent, {
@@ -112,7 +111,6 @@ export class AddStockComponent
     this.formGroup.markAsDirty();
     this.formGroup.markAllAsTouched();
     if (!this.formGroup.valid) {
-      console.log(this.productSelected.id);
       this.toastService.showError(
         'Error en formulario',
         'Debe completar todos los campos para registrar un Stock'

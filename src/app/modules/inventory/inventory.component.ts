@@ -73,13 +73,11 @@ export class InventoryComponent
     );
   }
   getStock(id: number) {
-    console.log(id);
     this.subscriptions$.add(
       this.depotService
         .getId(id)
         .pipe(
           map((depot: Depot[]) => {
-            console.log(depot);
             this.depot = depot[0];
             this.depotSelected = true;
             let params = { depot_id: depot[0].id };
