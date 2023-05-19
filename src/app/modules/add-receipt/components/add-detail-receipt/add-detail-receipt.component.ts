@@ -59,7 +59,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
               type="number"
               pInputText
               min="0"
-              max="9999"
+              [max]="9999" 
               [(ngModel)]="product.quantitySelected"
               oninput="validity.valid||(value='');"
               (change)="getTotal(product)"
