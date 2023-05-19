@@ -19,6 +19,8 @@ import { Subject } from 'rxjs';
           [formControlName]="name"
           [placeholder]="placeholder"
           (onInput)="onInput()"
+          [min]="1"
+          [max]="99999"
           [ngClass]="
             this.group.get(this.name)?.invalid &&
             this.group.get(this.name)?.touched
