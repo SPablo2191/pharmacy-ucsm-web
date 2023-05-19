@@ -10,7 +10,7 @@
       errorMessage="Seleccionar una sucursal"
       (value)="getStock($event)"
     ></ui-dropdown>
-    <div *ngIf="stocks.length != 0">
+    <div *ngIf="depotSelected">
       <ui-crud-table
         [cols]="cols"
         [items]="stocks"

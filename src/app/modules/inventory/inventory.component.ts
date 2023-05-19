@@ -23,6 +23,7 @@ export class InventoryComponent
 {
   addComponent: any = AddStockComponent;
   depot! : Depot;
+  depotSelected : boolean = false;
   cols: Column[] = [
     { header: 'Producto', field: 'product', subField: 'name' } as Column,
     {
@@ -80,6 +81,7 @@ export class InventoryComponent
           map((depot: Depot[]) => {
             console.log(depot);
             this.depot = depot[0];
+            this.depotSelected = true;
             let params = { depot_id: depot[0].id };
             this.subscriptions$.add(
               this.stockService
