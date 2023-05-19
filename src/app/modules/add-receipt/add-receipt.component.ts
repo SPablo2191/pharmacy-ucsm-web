@@ -14,6 +14,7 @@ import { ReceiptService } from 'src/app/services/receipt.service';
 import { Receipt, ReceiptDetail } from 'src/app/models/Receipt.interface';
 import { Router } from '@angular/router';
 import { ToastMessageService } from 'src/app/core/services/toast-message.service';
+import {  emailValidator } from 'src/app/core/consts';
 
 @Component({
   selector: 'app-add-receipt',
@@ -46,7 +47,7 @@ export class AddReceiptComponent extends abstractForm implements OnInit,OnDestro
       phoneNumber: [null, Validators.required],
       DNI: [null, Validators.required],
       address: [null, Validators.required],
-      email: [null, Validators.required],
+      email: [null, [Validators.required,Validators.pattern(emailValidator)]],
       branch: [null, Validators.required],
       details: [null, this.productsSelected],
       total: [null, Validators.required],
