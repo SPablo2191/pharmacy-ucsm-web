@@ -18,6 +18,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
           [id]="name"
           [formControlName]="name"
           autofocus
+          [maxlength]="maxlength"
           autocomplete="off"
           [ngClass]="
             this.group.get(this.name)?.invalid &&
@@ -49,4 +50,5 @@ export class UiInputTextComponent {
   @Input() submitted: boolean = false;
   @Input() customClass!: string;
   @Input() readonly: boolean = false;
+  @Input() maxlength! : string | number;
 }

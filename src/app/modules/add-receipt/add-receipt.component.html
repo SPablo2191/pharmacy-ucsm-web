@@ -17,11 +17,14 @@
       [group]="formGroup"
       name="phoneNumber"
       label="Teléfono"
+      [max]="999999999"
+
     ></ui-input-number>
     <ui-input-number
       [group]="formGroup"
       name="DNI"
       label="DNI"
+      [max]="99999999"
     ></ui-input-number>
     <ui-input-text
       [group]="formGroup"

@@ -20,7 +20,7 @@ import { Subject } from 'rxjs';
           [placeholder]="placeholder"
           (onInput)="onInput()"
           [min]="1"
-          [max]="99999"
+          [max]="max"
           [ngClass]="
             this.group.get(this.name)?.invalid &&
             this.group.get(this.name)?.touched
@@ -54,6 +54,7 @@ export class UiInputNumberComponent {
   valid: boolean = false;
   @Output() value = new EventEmitter<string>();
   change: Subject<string> = new Subject<string>();
+  @Input() max! : number;
 
   constructor() {}
 
